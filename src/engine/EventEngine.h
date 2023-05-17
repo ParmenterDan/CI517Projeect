@@ -10,7 +10,7 @@
 #include "GameMath.h"
 
 enum Key {
-	W, S, A, D, ESC, SPACE, UP, DOWN, LEFT, RIGHT, QUIT, LAST
+	W, S, A, D, E, ESC, SPACE, UP, DOWN, LEFT, RIGHT, QUIT, LAST, ENTER
 };
 
 enum Mouse {
@@ -19,46 +19,46 @@ enum Mouse {
 
 class EventEngine {
 	friend class XCube2Engine;
-	private:
-		bool running;
-		SDL_Event event;
-		bool keys[Key::LAST];
-		bool buttons[Mouse::BTN_LAST];
+private:
+	bool running;
+	SDL_Event event;
+	bool keys[Key::LAST];
+	bool buttons[Mouse::BTN_LAST];
 
-		void updateKeys(const SDL_Keycode &, bool);
+	void updateKeys(const SDL_Keycode&, bool);
 
-		EventEngine();
-	public:
-		~EventEngine();
+	EventEngine();
+public:
+	~EventEngine();
 
-		/**
-		* Equivalent to calling SDL_PollEvent()
-		*/
-		void pollEvents();
-		
-		bool isPressed(Key);
-		bool isPressed(Mouse);
-    
-        /**
-         * Software emulation of keypresses
-         */
-        void setPressed(Key);
-        void setPressed(Mouse);
-	
-		void setMouseRelative(bool);
+	/**
+	* Equivalent to calling SDL_PollEvent()
+	*/
+	void pollEvents();
 
-		/**
-		* Returns mouse's delta position
-		* It's the difference between current and
-		* previous mouse positions
-		*
-		*/
-		Point2 getMouseDPos();
+	bool isPressed(Key);
+	bool isPressed(Mouse);
 
-		/**
-		* Returns current mouse position relative to the window
-		*/
-		Point2 getMousePos();
+	/**
+	 * Software emulation of keypresses
+	 */
+	void setPressed(Key);
+	void setPressed(Mouse);
+
+	void setMouseRelative(bool);
+
+	/**
+	* Returns mouse's delta position
+	* It's the difference between current and
+	* previous mouse positions
+	*
+	*/
+	Point2 getMouseDPos();
+
+	/**
+	* Returns current mouse position relative to the window
+	*/
+	Point2 getMousePos();
 };
 
 #endif
